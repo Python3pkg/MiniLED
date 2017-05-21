@@ -16,14 +16,14 @@ class Sign:
 
 	def setmessage(self, text, slot=1, effect='hold', speed=1):
 		# validate message
-		if not speed in xrange(1, 6) or not slot in xrange(1, 9) or not effect in effects:
+		if not speed in range(1, 6) or not slot in range(1, 9) or not effect in effects:
 			return
 
 		# write null char packet
 		packets = [struct.pack('B', 0x00)]
 		
 		# write packets for message
-		for i in xrange(4):
+		for i in range(4):
 			packet = struct.pack('BBBB', 0x02, 0x31, 0x05+slot, 0x40*i)
 			if i is 0:
 				packet += struct.pack('BBBB60s',  0x30+speed, 0x31, effects[effect], len(text), text[:64])
